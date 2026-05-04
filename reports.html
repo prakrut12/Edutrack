@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Reports | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">SQL analytics</span>
+        <h1>Subject-wise Reports</h1>
+        <p>Summarize attendance percentage, marks percentage, and top-performing students.</p>
+    </div>
+</header>
+
+<section class="dashboard-grid">
+    <article class="panel">
+        <h2>Subject Summary</h2>
+        {% include "_subject_report.html" %}
+    </article>
+    <article class="panel">
+        <h2>Top Students</h2>
+        <div class="bar-list">
+            {% for student in toppers %}
+            <div class="bar-row">
+                <span>{{ student.roll_no }} · {{ student.full_name }}</span>
+                <strong>{{ student.average_percent }}%</strong>
+                <div style="width: {{ student.average_percent }}%"></div>
+            </div>
+            {% else %}
+            <p class="muted">No marks are available yet.</p>
+            {% endfor %}
+        </div>
+    </article>
+</section>
+{% endblock %}

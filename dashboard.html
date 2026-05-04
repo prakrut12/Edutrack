@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Academic dashboard</span>
+        <h1>Attendance & Performance Overview</h1>
+        <p>Track student participation, internal marks, and subject-level outcomes from one SQL-backed dashboard.</p>
+    </div>
+    <a class="button" href="{{ url_for('attendance') }}">Mark attendance</a>
+</header>
+
+<section class="metric-grid">
+    <article class="metric-card"><span>Students</span><strong>{{ summary.students }}</strong></article>
+    <article class="metric-card"><span>Subjects</span><strong>{{ summary.subjects }}</strong></article>
+    <article class="metric-card"><span>Attendance rows</span><strong>{{ summary.attendance }}</strong></article>
+    <article class="metric-card"><span>Marks entries</span><strong>{{ summary.marks }}</strong></article>
+</section>
+
+<section class="dashboard-grid">
+    <article class="panel">
+        <div class="section-title">
+            <div>
+                <h2>Low Attendance Alerts</h2>
+                <p>Students below the default 75% threshold.</p>
+            </div>
+            <a class="button secondary" href="{{ url_for('low_attendance') }}">View all</a>
+        </div>
+        {% set rows = low_attendance %}
+        {% include "_low_table.html" %}
+    </article>
+    <article class="panel">
+        <h2>Subject Report</h2>
+        {% include "_subject_report.html" %}
+    </article>
+</section>
+{% endblock %}

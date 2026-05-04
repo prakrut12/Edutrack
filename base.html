@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}EduTrack{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if g.user %}
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="brand" href="{{ url_for('dashboard') }}">
+                <span class="brand-mark">ET</span>
+                <span><strong>EduTrack</strong><small>Attendance & Marks</small></span>
+            </a>
+            <nav>
+                <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('students') }}">Students</a>
+                <a href="{{ url_for('attendance') }}">Attendance</a>
+                <a href="{{ url_for('marks') }}">Marks</a>
+                <a href="{{ url_for('low_attendance') }}">Low Attendance</a>
+                <a href="{{ url_for('reports') }}">Reports</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+            <div class="profile">
+                <span>{{ g.user.full_name[:1]|upper }}</span>
+                <div><strong>{{ g.user.full_name }}</strong><small>{{ g.user.role|title }}</small></div>
+            </div>
+        </aside>
+        <main class="content">
+            {% include "_flash.html" %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% else %}
+    <main class="auth-page">
+        {% include "_flash.html" %}
+        {% block auth_content %}{% endblock %}
+    </main>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Attendance | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Daily attendance</span>
+        <h1>Mark Attendance</h1>
+        <p>Select a subject and date, then mark each student as present or absent.</p>
+    </div>
+</header>
+
+<section class="panel">
+    <form method="post">
+        <div class="form-grid compact">
+            <label>Subject
+                <select name="subject_id">
+                    {% for subject in subjects %}
+                    <option value="{{ subject.id }}" {% if selected_subject == subject.id|string %}selected{% endif %}>{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Date
+                <input type="date" name="attendance_date" value="{{ selected_date }}">
+            </label>
+        </div>
+        <div class="attendance-list">
+            {% for student in students %}
+            {% set current = attendance_map.get(student.id, "Present") %}
+            <div class="attendance-row">
+                <div>
+                    <strong>{{ student.roll_no }} · {{ student.full_name }}</strong>
+                    <small>{{ student.class_name }} - Section {{ student.section }}</small>
+                </div>
+                <div class="segmented">
+                    <label><input type="radio" name="student_{{ student.id }}" value="Present" {% if current == "Present" %}checked{% endif %}><span>Present</span></label>
+                    <label><input type="radio" name="student_{{ student.id }}" value="Absent" {% if current == "Absent" %}checked{% endif %}><span>Absent</span></label>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Save attendance</button>
+    </form>
+</section>
+{% endblock %}

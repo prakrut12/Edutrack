@@ -1,0 +1,15 @@
+<div class="table-wrap">
+    <table>
+        <thead><tr><th>Subject</th><th>Classes</th><th>Attendance %</th><th>Marks %</th></tr></thead>
+        <tbody>
+            {% for row in subject_report %}
+            <tr>
+                <td><strong>{{ row.subject_name }}</strong></td>
+                <td>{{ row.classes_marked or 0 }}</td>
+                <td>{{ row.attendance_percent or 0 }}%</td>
+                <td>{{ row.marks_percent or 0 }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

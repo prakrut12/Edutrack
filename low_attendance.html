@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Low Attendance | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Risk detection</span>
+        <h1>Low Attendance Students</h1>
+        <p>Identify students who need attention before they fall below eligibility requirements.</p>
+    </div>
+</header>
+
+<section class="panel filter-panel">
+    <form class="filter-bar" method="get">
+        <label>Threshold percentage
+            <input type="number" step="1" min="1" max="100" name="threshold" value="{{ threshold }}">
+        </label>
+        <button type="submit">Apply</button>
+    </form>
+</section>
+
+<section class="panel">
+    {% include "_low_table.html" %}
+</section>
+{% endblock %}

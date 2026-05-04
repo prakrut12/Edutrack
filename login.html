@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Login | EduTrack{% endblock %}
+{% block auth_content %}
+<section class="auth-card">
+    <div class="auth-copy">
+        <span class="eyebrow">Teacher analytics workspace</span>
+        <h1>EduTrack</h1>
+        <p>Manage students, mark attendance, record subject marks, detect low attendance, and generate performance reports.</p>
+    </div>
+    <form method="post" class="panel form-panel">
+        <h2>Teacher Login</h2>
+        <label>Username
+            <input name="username" autocomplete="username" required>
+        </label>
+        <label>Password
+            <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Login</button>
+        <p class="muted">Demo: <strong>teacher</strong> / <strong>teacher123</strong></p>
+    </form>
+</section>
+{% endblock %}

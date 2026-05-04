@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Marks | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Performance entry</span>
+        <h1>Add Marks</h1>
+        <p>Record subject-wise internal marks and generate analytics automatically.</p>
+    </div>
+</header>
+
+<section class="panel">
+    <form method="post">
+        <div class="form-grid compact">
+            <label>Subject
+                <select name="subject_id">
+                    {% for subject in subjects %}
+                    <option value="{{ subject.id }}" {% if selected_subject == subject.id|string %}selected{% endif %}>{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Exam name
+                <input name="exam_name" value="{{ exam_name }}" required>
+            </label>
+            <label>Maximum marks
+                <input type="number" step="0.5" min="1" name="max_marks" value="{{ max_marks }}" required>
+            </label>
+        </div>
+        <div class="marks-list">
+            {% for student in students %}
+            <label class="marks-row">
+                <span><strong>{{ student.roll_no }} · {{ student.full_name }}</strong><small>{{ student.class_name }} - Section {{ student.section }}</small></span>
+                <input type="number" step="0.5" min="0" max="{{ max_marks }}" name="student_{{ student.id }}" value="{{ marks_map.get(student.id, '') }}">
+            </label>
+            {% endfor %}
+        </div>
+        <button type="submit">Save marks</button>
+    </form>
+</section>
+{% endblock %}

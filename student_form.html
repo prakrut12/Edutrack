@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Add Student | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">New student</span>
+        <h1>Add Student</h1>
+        <p>Create a student record used for attendance and marks tracking.</p>
+    </div>
+    <a class="button secondary" href="{{ url_for('students') }}">Back</a>
+</header>
+
+<section class="panel form-shell">
+    <form method="post" class="form-grid">
+        <label>Roll number
+            <input name="roll_no" required>
+        </label>
+        <label>Full name
+            <input name="full_name" required>
+        </label>
+        <label>Email
+            <input type="email" name="email">
+        </label>
+        <label>Class
+            <input name="class_name" placeholder="CSE 3rd Year" required>
+        </label>
+        <label>Section
+            <input name="section" placeholder="A" required>
+        </label>
+        <button type="submit">Save student</button>
+    </form>
+</section>
+{% endblock %}

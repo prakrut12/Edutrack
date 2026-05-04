@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Students | EduTrack{% endblock %}
+{% block content %}
+<header class="page-header">
+    <div>
+        <span class="eyebrow">Student records</span>
+        <h1>Students</h1>
+        <p>Add and search students by roll number, name, or class.</p>
+    </div>
+    <a class="button" href="{{ url_for('add_student') }}">Add student</a>
+</header>
+
+<section class="panel filter-panel">
+    <form class="filter-bar" method="get">
+        <label>Search
+            <input name="q" value="{{ q }}" placeholder="Roll number, name, or class">
+        </label>
+        <button type="submit">Search</button>
+        <a class="button ghost" href="{{ url_for('students') }}">Reset</a>
+    </form>
+</section>
+
+<section class="panel">
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Roll No</th><th>Name</th><th>Email</th><th>Class</th><th>Section</th></tr></thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.roll_no }}</td>
+                    <td><strong>{{ student.full_name }}</strong></td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.class_name }}</td>
+                    <td>{{ student.section }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5">No students found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
